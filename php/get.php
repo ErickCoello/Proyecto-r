@@ -12,7 +12,7 @@ $condition = 'id_c = '.$id_cc.' AND id_ciclo = id_c';
 $conn = new Conectar();
 $opp = new Operaciones('', $conn);
 $ciclo_row = $opp->getID('ciclos_e', 'id_ciclo = '.$id_cc);
-$registros = $opp->getRelacional($atribtos, $tables, $condition);
+$registros = $opp->getRelacional($atribtos, $tables, $condition, false);
 ?>
 
 <table class="table table-responsive mt-auto">
@@ -43,7 +43,12 @@ $registros = $opp->getRelacional($atribtos, $tables, $condition);
                     <?php
                     echo '<h3 class="text-center h3 mt-h1">Datos de alumnos del ciclo escolar '.$ciclo_row[1].'</h3>';
                     
-                    for($i = 0; $i < sizeof($registros); $i++){
+                    if(sizeof($registros) == 0) {
+                        echo "<tr>
+                                <td colspan='13' class='text-center font-italic'>No se encontraron registros.</td>
+                            </td>";
+                    } else {
+                        for($i = 0; $i < sizeof($registros); $i++){
                         echo "
                         <tr>
                         <td class='text-left font-italic'>".$registros[$i]['nombre']."</td>
@@ -59,6 +64,7 @@ $registros = $opp->getRelacional($atribtos, $tables, $condition);
                         <td class='text-left font-italic'>".$registros[$i]['observaciones']."</td>
                         <td><button class='btn btn-link' type='button' onclick=\"window.open('editar.php?id=".$registros[$i]['id']."','_self')\" href='javascript:void(0);'>Actualizar.</button></td>
                         <td><button type='button' class='btn btn-link' onclick='eliminar(".$registros[$i]['id'].")'>Eliminar.</button></td> </tr>";
+                    }
                     }
                     ?>
                 </tbody> </table>

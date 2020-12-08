@@ -27,12 +27,19 @@ class Operaciones {
         }
     }
     
-    function addData($table, $id, $datos) {
+    function addData($table, $atribut, $id, $datos) {
         foreach ($datos as $value) {
             $x = $x."'{$value}',";
         }
-        $proceso = $this->mysql->ejecutar('INSERT INTO '.$table.' ('.$this->z.') VALUES ('.$id.','.substr($x, 0, -1).')');
-        return $proceso;
+        if($atribut == ''){
+            $proceso = $this->mysql->ejecutar('INSERT INTO '.$table.' ('.$this->z.') VALUES ('.$id.','.substr($x, 0, -1).')');
+            return $proceso;
+        }
+        if($id == 0 || $atribut != '') {
+             $ejecucion = $this->mysql->ejecutar('INSERT INTO '.$table.' ('.$atribut.') VALUES ('.$substr($x, 0, -1).')');
+             return $ejecucion;
+        }   
+        
     }
     
     function getData($tableName){
@@ -57,18 +64,24 @@ function updateData($tabla, $datoss, $condicion) {
         return $update;
     }
     
-    function getRelacional($atributes, $tables, $condition){
-        foreach ($atributes as $value) {
+    function getRelacional($atributes, $tables, $condition, $operacion){
+        if($operacion == null) {
+            foreach ($atributes as $value) {
             $a = $a."{$value},";
         }
         
         foreach ($tables as $key) {
             $b = $b."{$key},";
         }
-        echo "<script> console.log('SELECT ".substr($a, 0, -1)." FROM ". substr($b, 0, -1)." WHERE ".$condition."'); </script>";
         $this->mysql->ejecutar('SELECT '.substr($a, 0, -1).' FROM '. substr($b, 0, -1).' WHERE '.$condition);
         $datos = $this->mysql->asociar();
         return $datos;
+        }
+        if($operacion == true) {
+        $this->mysql->ejecutar('SELECT '.$atributes.' FROM '.$tables.' WHERE '.$condition);
+        $d = $this->mysql->assocRow();
+        return $d;
+        }
     }
     
     function getID($tabla, $condicion){

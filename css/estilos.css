@@ -7,6 +7,9 @@ and open the template in the editor.
     Created on : 7/11/2020, 11:27:43 AM
     Author     : Erick
 */
+.mb-button{
+    margin-top: 31px;
+}
 .mt-from{
     margin-top: 80px;
 }
@@ -41,6 +44,88 @@ table {
     border-color: black;
 }
 
+.body-login{
+    background: url(../img/809753e3ea7381415fb66d27e957f4eb.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
 .font-a-a{
     font-size: 22px;
 }
+
+.modal-content{
+    background-color: #807B7B;
+    opacity: .85;
+    padding: 0 20px;
+}
+
+.section-p{
+    margin: 0 auto;
+    margin-top: 25%;
+    padding: 0;
+}
+
+.user-img{
+    margin-top: -80px;
+    margin-bottom: 35px;
+}
+
+.user-img img{
+    width: 100px;
+    height: 100px;
+}
+
+.forma-l input{
+    height: 42px;
+    font-size: 18px;
+    border: 0px;
+    padding-left: 54px;
+    border-radius: 5px;
+}
+
+.forma-l::before{
+    font-family: "Font Awesome\ 5 Free";
+    position: absolute;
+    left: 20px;
+    font-size: 22px;
+    padding-top: 4px;
+}
+
+.forma-l#user::before{
+    content: "\f007";
+}
+
+.forma-l#password::before{
+    content: "\f023";
+}
+
+.c-boton{
+    width: 60%;
+    margin: 5px 0 25px;
+}
+
+.link-f{
+    padding: 5px 0;
+}
+.form-center-a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.form {
+    width: 450px;
+}
+
+.section-l{
+    margin: 0 auto;
+    margin-top: 8%;
+    padding: 0;
+}
+
+.body-user {
+    background: url(../img/D0EDz2Y-4k-Resolution-Wallpaper-4K-Wallpaper-3840x2160.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+

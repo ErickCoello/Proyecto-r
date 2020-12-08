@@ -78,7 +78,13 @@ $arreglo_ciclos = $operacionDatos->getData('ciclos_e');
                     <th class="text-center table-dark" scope="col">CURP:</th>
                 </tr> </thead>
                 <tbody class="table-active">
-                    <?php for($i = 0; $i < sizeof($arreglo_dato); $i++) {
+                    <?php
+                        if(sizeof($arreglo_dato) == 0) {
+                            echo "<tr>
+                                    <td colspan='13' class='text-center font-italic'>No se encontraron registros.</td>
+                                  </td>";
+                        } else {
+                        for($i = 0; $i < sizeof($arreglo_dato); $i++) {
                         echo "
                         <tr>
                         <td class='text-left font-italic'>".$arreglo_dato[$i]['nombre']."</td>
@@ -94,7 +100,9 @@ $arreglo_ciclos = $operacionDatos->getData('ciclos_e');
                         <td class='text-left font-italic'>".$arreglo_dato[$i]['observaciones']."</td>
                         <td><button class='btn btn-link' type='button' onclick=\"window.open('editar.php?id=".$arreglo_dato[$i]['id']."','_self')\" href='javascript:void(0);'>Actualizar.</button></td>
                         <td><button type='button' class='btn btn-link' onclick='eliminar(".$arreglo_dato[$i]['id'].")'>Eliminar.</button></td> </tr>";
-                    } ?>
+                    }
+                        }
+                    ?>
                 </tbody>
             </table>
             </div>

@@ -9,6 +9,7 @@
 include '../config/bd.php';
 include '../controladores/Conector.php';
 include '../controladores/CRUD.php';
+include '../controladores/Ventanas.php';
 
 $grado1 = '';
 $grado2 = '';
@@ -80,4 +81,11 @@ $datos_save = array($_POST['nombres'], $grado1, $grado2, $grado3, $cpri, $b1, $b
 
 $conectionAdd = new Conectar();
 $operacionSave = new Operaciones('datos_alumnos', $conectionAdd);
-$ejecucion = $operacionSave->addData('datos_alumnos', $_POST['menu'], $datos_save);
+$ejecucion = $operacionSave->addData('datos_alumnos', '', $_POST['menu'], $datos_save);
+$cuadro_d = new Dialogo();
+
+if($ejecucion != null){
+    $cuadro_d->ventanaDialog('guardar');
+} else {
+    $cuadro_d->errorDialog();
+}

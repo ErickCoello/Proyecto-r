@@ -21,8 +21,9 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/estilos.css">
         <link rel="stylesheet" type="text/css" href="fontawesome-free-5.14.0-web/css/solid.css">
-        <script type="text/javascript" src="js/jquery-3.5.1.min.js"> </script>
-        <script type="text/javascript" src="js/principal.js"></script>
+        <link rel="stylesheet" type="text/css" href="node_modules/sweetalert2/dist/sweetalert2.css">
+        <link rel="stylesheet" type="text/css" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
+    
     </head>
     <body class="">
         <nav class="navbar navbar-expand-sm bg-primary navbar-dark fixed-top">
@@ -130,9 +131,14 @@ and open the template in the editor.
            <div id="rest"></div>
         </form>
         
-               
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"> </script>
+    <script type="text/javascript" src="js/principal.js"></script>          
     <script type="text/javascript" src="js/popper.min.js"> </script>
     <script type="text/javascript" src="js/bootstrap.min.js"> </script>
     <script type="text/javascript" src="fontawesome-free-5.14.0-web/js/all.js"></script>
+    <script type="text/javascript" src="node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
+    <script type="text/javascript" src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="node_modules/sweetalert2/dist/sweetalert2.js"></script>
+    <script type="text/javascript" src="node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
     </body>
 </html>
