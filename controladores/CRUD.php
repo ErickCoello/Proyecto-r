@@ -1,17 +1,18 @@
 <?php
-
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 class Operaciones {
     public $mysql;
     public $z;
+    public $script_sql;
             
     function __construct($tabla, $ObjConnect) {
         $this->mysql = $ObjConnect;
+        
+        $this->addCiclo();
         
         if($tabla == "") {
             echo '<script> console.log("proceso correcto"); </script>';    
@@ -65,7 +66,7 @@ function updateData($tabla, $datoss, $condicion) {
     }
     
     function getRelacional($atributes, $tables, $condition, $operacion){
-        if($operacion == null) {
+        if($operacion == false) {
             foreach ($atributes as $value) {
             $a = $a."{$value},";
         }
@@ -73,7 +74,8 @@ function updateData($tabla, $datoss, $condicion) {
         foreach ($tables as $key) {
             $b = $b."{$key},";
         }
-        $this->mysql->ejecutar('SELECT '.substr($a, 0, -1).' FROM '. substr($b, 0, -1).' WHERE '.$condition);
+        $valr = 'SELECT '.substr($a, 0, -1).' FROM '. substr($b, 0, -1).' WHERE '.$condition;
+        $this->mysql->ejecutar($valr);
         $datos = $this->mysql->asociar();
         return $datos;
         }
@@ -82,11 +84,28 @@ function updateData($tabla, $datoss, $condicion) {
         $d = $this->mysql->assocRow();
         return $d;
         }
+        
+        if($tables == '' && $condition == '' && $operacion == null) {
+            $this->mysql->ejecutar($atributes);
+            $c = $this->mysql->asociar();
+            return c;
+        }
     }
     
     function getID($tabla, $condicion){
         $this->mysql->ejecutar('SELECT *FROM '.$tabla.' WHERE '.$condicion);
         $registro = $this->mysql->assocRow();
         return $registro;
+    }
+    
+    function addCiclo() {
+        $anio_r = date('Y') + 1;
+        
+        $insert_sql = 'INSERT INTO ciclos_e(ciclo_e) VALUES ("'.$anio_r.'")';
+        if(date('d/m') == '03/01') {
+            $this->mysql->ejecutar($insert_sql);
+        } else {
+            echo '<script> console.log("Error"); </script>';
+        }
     }
 }

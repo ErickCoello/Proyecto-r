@@ -3,12 +3,20 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* https://www.ecodeup.com/como-subir-el-codigo-de-tu-proyecto-a-github/
+/* 
     Created on : 7/11/2020, 11:27:43 AM
     Author     : Erick
+
+@font-face { font-family:'FontAwesome'; src:url('./fontawesome-webfont.eot'); src:url('./fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('./fontawesome-webfont.woff') format('woff'), url('./fontawesome-webfont.ttf') format('truetype'), url('./fontawesome-webfont.svg#FontAwesome') format('svg'); font-weight:normal; font-style:normal } [class^="icon-"]:before, [class*=" icon-"]:before { font-family:FontAwesome; font-weight:normal; font-style:normal; display:inline-block; text-decoration:inherit }
 */
+
 .mb-button{
     margin-top: 31px;
+}
+
+.icon-warning {
+    margin-top: 37px;
+    font-size: 26px;
 }
 .mt-from{
     margin-top: 80px;
@@ -129,3 +137,12 @@ table {
     background-size: cover;
 }
 
+.section-r {
+    margin: 0 auto;
+    margin-top: 15%;
+    padding: 0;
+}
+
+.maove-div {
+    right: 10px;
+}

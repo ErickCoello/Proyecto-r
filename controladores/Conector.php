@@ -25,7 +25,7 @@ class Conectar {
     }
     
     public function ejecutar($sql) {
-        
+        //echo "<script> console.log('".$sql."'); </script>";
         $a = $this->query = mysqli_query($this->conn, $sql);
         return $a;
     }

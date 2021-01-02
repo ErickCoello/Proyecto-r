@@ -1,3 +1,8 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
+    <script type="text/javascript" src="node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+</head>
 <?php
 
 /* 
@@ -82,10 +87,29 @@ $datos_save = array($_POST['nombres'], $grado1, $grado2, $grado3, $cpri, $b1, $b
 $conectionAdd = new Conectar();
 $operacionSave = new Operaciones('datos_alumnos', $conectionAdd);
 $ejecucion = $operacionSave->addData('datos_alumnos', '', $_POST['menu'], $datos_save);
-$cuadro_d = new Dialogo();
+
 
 if($ejecucion != null){
-    $cuadro_d->ventanaDialog('guardar');
+    echo "
+    <script type='text/javascript'>
+        Swal.fire({
+            icon: 'success',
+            title: '¡Exelente!',
+            text: 'Los datos fueron guardados correctamente.'
+        }).then((result) => {
+            location.href='http://localhost/EscuelaSecundaria/registrar.php';
+        });
+    </script>";
 } else {
-    $cuadro_d->errorDialog();
+    echo "
+    <script type='text/javascript'>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: '¡Ups, que mal!',
+            text: 'El proceso de guardar datos ha fallado, reintente...',
+            showConfirmButton: false,
+            timer: 2500
+        });
+    </script>";
 }

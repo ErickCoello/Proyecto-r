@@ -4,6 +4,9 @@ include './config/bd.php';
 include './controladores/Conector.php';
 include './controladores/CRUD.php';
 
+session_start();
+if(isset($_SESSION['id'])) {
+
 $id_alumno = $_GET['id'];
 
 $conectarID = new Conectar();
@@ -115,3 +118,9 @@ $consulta_ciclos = $operacionId->getData('ciclos_e');
            
            
         </form> </body> </html>
+<?php 
+} else {
+    echo '<script> location.href="http://localhost/EscuelaSecundaria/index.php" </script>';
+}
+
+?>

@@ -11,8 +11,9 @@ include '../controladores/otherOperations.php';
 
 $connetc_l = new Conectar();
 $objeto_n = new other();
+$operacion_form = $_POST['tipo-operacion'];
 
-if($_POST['tipo-operacion'] == 1) {
+if($operacion_form == 1) {
     $operacionn1 = new Operaciones('users', $connetc_l);
     
     $insertar_datos = array($_POST['names'], $_POST['correo'], md5($_POST['psss']));
@@ -28,8 +29,6 @@ if($_POST['tipo-operacion'] == 1) {
                 timer: 2800
               });
               </script>";
-        sleep(10);
-        $objeto_n->paginacion('http://localhost/EscuelaSecundaria/');
         
     } else {
         echo "<script type='text/javascript'>
@@ -43,16 +42,17 @@ if($_POST['tipo-operacion'] == 1) {
     }
 }
 
-if($_POST['tipo-operacion'] == 2) {
+if($operacion_form == 2) {
     $operacion2 = new Operaciones('', $connetc_l);
     $name_u = $_POST['user'];
     $pas_u = md5($_POST['pss']);
     
     $consulta_acceso = $operacion2->getID('users', 'email = "'.$name_u.'" AND password = "'.$pas_u.'"');
     
-    if(sizeof($consulta_acceso) != 0) {
     if($name_u == $consulta_acceso[3] && $pas_u == $consulta_acceso[4]) {
-        echo '<script> location.href="http://localhost/EscuelaSecundaria/home.php?r='.$consulta_acceso[0].'"; </script>';
+        session_start();
+        $_SESSION['id'] = $consulta_acceso[0];
+        echo '<script> location.href="http://localhost/EscuelaSecundaria/home.php"; </script>';
     } else {
         echo "<script type='text/javascript'>
             Swal.fire({
@@ -63,14 +63,42 @@ if($_POST['tipo-operacion'] == 2) {
                 timer: 2500
               });</script>";
     }
+}
+
+if($operacion_form == 3) {
+    $link = 'http://localhost/EscuelaSecundaria/verify.php?user='.$_POST['e-recuperacion'];
+    $texto = 'Ingrese al siguiente link: \n'.$link;
+    
+    $objeto_n->enviarEmail($_POST['e-recuperacion'], '', 'Verificador de e-mail', $texto);
+    echo '<script type="text/javascript">location.href="http://localhost/EscuelaSecundaria/"</script>';
+}
+
+if($operacion_form == 4) {
+    echo '<script> console.log("metodo recuperarusuario aaaa"); </script>';
+    
+    $operacionn4 = new Operaciones('', $connetc_l);
+    
+    $datos = 'id_p='.$_POST['puesto-select'].',name_u="'.$_POST['names'].'",email="'.$_POST['correo'].'",password="'. md5($_POST['new-pss2']).'"';
+    
+    $actualizar_user = $operacionn4->updateData('users', $datos, 'id = '.$_POST['id_user']);
+    
+    if($actualizar_user != null){
+        echo "<script type='text/javascript'>
+            Swal.fire({
+                icon: 'success',
+                title: '¡Bien!',
+                text: 'Inicie sesión con su nueva contraseña.'
+             }).then((result) => {
+                location.href='http://localhost/EscuelaSecundaria/';
+             });
+             </script>";
     } else {
         echo "<script type='text/javascript'>
             Swal.fire({
-                position: 'top-end',
                 icon: 'error',
-                title: 'Sin datos guardados.',
-                showConfirmButton: false,
-                timer: 2500
-              });</script>";
+                title: '¡Alg salió mal!',
+                text: 'Reintente.'
+             });
+             </script>";
     }
 }

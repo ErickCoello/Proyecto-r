@@ -1,3 +1,8 @@
+<head>
+    <link type="text/css" rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
+    <script type="text/javascript" src="node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script type="text/javascript" src="js/principal.js"></script>
+</head>
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -7,7 +12,7 @@ include '../PHPMailer-master/src/PHPMailer.php';
 include '../PHPMailer-master/src/SMTP.php';
 
 class other {
-function enviarEmail($correo, $nombre, $asunto, $codigo_verificacion) {
+function enviarEmail($correo, $nombre, $asunto, $texto) {
     $mail = new PHPMailer(true);
 
 try {
@@ -28,18 +33,36 @@ try {
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = $asunto;
-    $mail->Body    = 'Hola '.$nombre.' su código de verificación es: '.$codigo_verificacion;
+    $mail->Body    = $texto;
 
-    $mail->send();
-    echo '<script> console.log("Mesaje enviado");</script>';
+    $a = $mail->send();
+    
+    if($a != null) {
+        echo '
+        <script type="text/javascript">
+        Swal.fire({
+        icon: "success",
+        title: "¡Bien!",
+        text: "El enlace fue enviado a su correo."
+        });
+        </script>
+    ';
+    }
+    
     } catch (Exception $e) {
-        echo "<script> console.log('Mesaje error {$mail->ErrorInfo}');</script>";
+        echo "
+            Swal.fire({
+                icon: 'error',
+                title: '¡Algó salió mal!,
+                text: 'El menaje no fue enviado a su correo.'
+              });
+         ";
     }
 }
 
 function generadorCodigo($recorrido) {
         $key = '';
-        $pattern = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTVWXYZ';
+        $pattern = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTVWXYZ#$%&/!¡¿?';
         $max = strlen($pattern)-1;
         for($i=0;$i < $recorrido;$i++) $key .= $pattern{mt_rand(0,$max)};
         return $key;

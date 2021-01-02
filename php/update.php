@@ -79,3 +79,28 @@ $dats = "id_c = ".$_POST['menu'].", nombre = '".$_POST['apellido']."', Gr1 = '".
 $cc = new Conectar();
 $oo = new Operaciones('', $cc);
 $update = $oo->updateData('datos_alumnos', $dats, 'id = '.$_POST['id_al']);
+
+if($update != null) {
+    echo "
+    <script type='text/javascript'>
+        Swal.fire({
+            icon: 'success',
+            title: '¡Exelente!',
+            text: 'Los datos fueron actualizados correctamente.'
+        }).then((result) => {
+            location.href='http://localhost/EscuelaSecundaria/datos.php';
+        });
+    </script>";
+} else {
+    echo "
+    <script type='text/javascript'>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: '¡Ups, que mal!',
+            text: 'Ocurrió un error al actualizar los datos, reintente..',
+            showConfirmButton: false,
+            timer: 2500
+        });
+    </script>";
+}

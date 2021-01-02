@@ -2,7 +2,9 @@
 include './config/bd.php';
 include './controladores/Conector.php';
 include './controladores/CRUD.php';
-
+//<a class="nav-link text-dark font-a-a" href="php/generatePDF.php" target="_blank"> <i class="fas fa-print" aria-hidden="true"></i></a>
+session_start();
+if(isset($_SESSION['id'])) {
 $conectorDatos = new Conectar();
 $operacionDatos = new Operaciones('', $conectorDatos);
 $arreglo_dato = $operacionDatos->getData('datos_alumnos');
@@ -16,6 +18,8 @@ $arreglo_ciclos = $operacionDatos->getData('ciclos_e');
         <meta name="viewport" content="width=device-width, initial-scale-1, shrink-to-fit-=no">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/estilos.css">
+        <link rel="stylesheet" type="text/css" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
+        <link rel="stylesheet" type="text/css" href="fontawesome-free-5.14.0-web/css/solid.css">
         <script type="text/javascript" src="js/principal.js"></script>
     </head>
     <body>
@@ -29,15 +33,17 @@ $arreglo_ciclos = $operacionDatos->getData('ciclos_e');
             <div class="navbar-collapse collapse" id="uno">
                 <ul class="navbar-nav mr-auto nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link text-dark font-weight-bold">Home.</a>
+                        <a class="nav-link text-dark font-weight-bold" href="home.php">Home.</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark font-weight-bold" href="registrar.php">Registrar.</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-dark font-weight-bold" href="datos.php">Datos.</a>
+                        <a class="nav-link active text-dark font-weight-bold">Datos.</a>
                     </li>
                 </ul>
+            </div>
+            <div id="print-icon">
             </div>
             <form class="form-inline sm-2 my-sm-0 navbar-brand" id="form-search">
                     <select class="custom-select" name="menu">
@@ -51,7 +57,7 @@ $arreglo_ciclos = $operacionDatos->getData('ciclos_e');
             </form>
         </nav>
         
-        <form class="mt-from mb-5 ml-5 mr-5">
+        <form class="mt-from mb-2 ml-2 mr-2" id="table_add_pdf" method="post" enctype="multipart/form-data">
             <div id="table_content">
                 <table class="table table-responsive mt-auto">
                 <thead>
@@ -110,8 +116,16 @@ $arreglo_ciclos = $operacionDatos->getData('ciclos_e');
         </form>
         
         
-        <script type="text/javascript" src="js/jquery-3.5.1.min.js"> </script>
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"> </script>
     <script type="text/javascript" src="js/popper.min.js"> </script>
     <script type="text/javascript" src="js/bootstrap.min.js"> </script>
+    <script type="text/javascript" src="fontawesome-free-5.14.0-web/js/all.js"></script>
+    <script type="text/javascript" src="node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
     </body>
 </html>
+<?php
+} else {
+    echo '<script> location.href="http://localhost/EscuelaSecundaria/index.php" </script>';
+}
+
+?>

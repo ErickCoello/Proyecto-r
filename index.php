@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(isset($_SESSION['id'])) {
+    echo '<script> location.href="http://localhost/EscuelaSecundaria/home.php" </script>';
+} else {
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +42,7 @@
                     <button type="button" onclick="userSesion(2)" class="btn btn-primary c-boton"> <i class="fas fa-sign-in-alt"></i> Iniciar Sesi&oacute;n</button>
                 </form>
                 <div class="col-12 link-f">
-                    <a href="user.php" class="text-light">Registrarse</a>
+                    <a href="user.php?o=1" class="text-light">Registrarse</a>
                 </div>
                 <div class="col-12 link-f">
                     <a href="recuperacion.php" class="text-light">Olvid&eacute; mi contrase&ntilde;a</a>
@@ -56,3 +62,4 @@
 <script type="text/javascript" src="node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
 </body>
 </html>
+<?php } ?>
